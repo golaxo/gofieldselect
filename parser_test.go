@@ -6,6 +6,22 @@ import (
 	"github.com/golaxo/gofieldselect/internal/lexer"
 )
 
+func TestParse_Empty(t *testing.T) {
+	t.Parallel()
+
+	input := ""
+	p := newParser(lexer.New(input))
+	node := p.Parse()
+
+	if len(p.Errors()) != 0 {
+		t.Fatalf("unexpected errors: %v", p.Errors())
+	}
+
+	if _, ok := node.(AllIdentifiers); !ok {
+		t.Fatalf("expected node to be AllIdentifiers, got %T", node)
+	}
+}
+
 func TestParse_Nested(t *testing.T) {
 	t.Parallel()
 
@@ -91,27 +107,6 @@ func TestParse_JSONKeyChars(t *testing.T) {
 	assertIdent(t, identifiers[0], "my-name")
 	assertIdent(t, identifiers[1], "1")
 	assertIdent(t, identifiers[2], "#")
-}
-
-func TestParse_Empty(t *testing.T) {
-	t.Parallel()
-
-	l := lexer.New("")
-	p := newParser(l)
-	nodes := p.Parse()
-
-	if len(p.Errors()) != 0 {
-		t.Fatalf("unexpected errors: %v", p.Errors())
-	}
-
-	identifiers, ok := nodes.(Identifiers)
-	if !ok {
-		t.Fatalf("expected nodes to be Identifiers, got %T", nodes)
-	}
-
-	if len(identifiers) != 0 {
-		t.Fatalf("expected 0 nodes, got %d", len(identifiers))
-	}
 }
 
 func assertIdent(t *testing.T, ident Identifier, want string) {

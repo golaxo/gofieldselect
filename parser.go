@@ -34,6 +34,10 @@ func (p *parser) Errors() []error {
 
 // Parse parses the input stream into a list of Nodes (top-level fields).
 func (p *parser) Parse() Node {
+	if p.peekToken.Type == token.EOF && p.curToken.Type == token.EOF {
+		return AllIdentifiers{}
+	}
+
 	return p.parseFields()
 }
 
