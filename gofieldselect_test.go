@@ -167,7 +167,7 @@ func parse(t *testing.T, sel string) Node {
 
 	p := newParser(lexer.New(sel))
 
-	node := p.Parse()
+	node := p.parse()
 	if len(p.Errors()) != 0 {
 		t.Fatalf("unexpected parse errors: %v", p.Errors())
 	}

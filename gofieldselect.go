@@ -165,7 +165,7 @@ func Get[T any](n Node, fieldName string, originalValue T) T {
 func Parse(fieldSelection string) (Node, error) {
 	p := newParser(lexer.New(fieldSelection))
 
-	n := p.Parse()
+	n := p.parse()
 	if len(p.Errors()) > 0 {
 		return nil, NewParsingError(p.Errors())
 	}

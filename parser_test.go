@@ -11,7 +11,7 @@ func TestParse_Empty(t *testing.T) {
 
 	input := ""
 	p := newParser(lexer.New(input))
-	node := p.Parse()
+	node := p.parse()
 
 	if len(p.Errors()) != 0 {
 		t.Fatalf("unexpected errors: %v", p.Errors())
@@ -27,7 +27,7 @@ func TestParse_Nested(t *testing.T) {
 
 	input := "id,name,address(street,number),age"
 	p := newParser(lexer.New(input))
-	node := p.Parse()
+	node := p.parse()
 
 	if len(p.Errors()) != 0 {
 		t.Fatalf("unexpected errors: %v", p.Errors())
@@ -66,9 +66,8 @@ func TestParse_Whitespace(t *testing.T) {
 	t.Parallel()
 
 	input := "  id ,  name , address ( street , number ) , age  "
-
 	p := newParser(lexer.New(input))
-	nodes := p.Parse()
+	nodes := p.parse()
 
 	if len(p.Errors()) != 0 {
 		t.Fatalf("unexpected errors: %v", p.Errors())
@@ -89,7 +88,7 @@ func TestParse_JSONKeyChars(t *testing.T) {
 
 	input := "my-name,1,#"
 	p := newParser(lexer.New(input))
-	nodes := p.Parse()
+	nodes := p.parse()
 
 	if len(p.Errors()) != 0 {
 		t.Fatalf("unexpected errors: %v", p.Errors())
@@ -107,6 +106,39 @@ func TestParse_JSONKeyChars(t *testing.T) {
 	assertIdent(t, identifiers[0], "my-name")
 	assertIdent(t, identifiers[1], "1")
 	assertIdent(t, identifiers[2], "#")
+}
+
+func TestParse_EmptyParenthesis(t *testing.T) {
+	t.Parallel()
+
+	input := "id,name,address()"
+	p := newParser(lexer.New(input))
+	nodes := p.parse()
+
+	if len(p.Errors()) != 0 {
+		t.Fatalf("unexpected errors: %v", p.Errors())
+	}
+
+	identifiers, ok := nodes.(Identifiers)
+	if !ok {
+		t.Fatalf("expected nodes to be Identifiers, got %T", nodes)
+	}
+
+	if len(identifiers) != 3 {
+		t.Fatalf("expected 3 top-level nodes, got %d", len(identifiers))
+	}
+}
+
+func TestParse_NotClosingParenthesis(t *testing.T) {
+	t.Parallel()
+
+	input := "id,name,address(street,number"
+	p := newParser(lexer.New(input))
+	_ = p.parse()
+
+	if len(p.Errors()) != 1 {
+		t.Fatal("expecting an error")
+	}
 }
 
 func assertIdent(t *testing.T, ident Identifier, want string) {

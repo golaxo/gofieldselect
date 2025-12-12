@@ -33,20 +33,23 @@ func (p *parser) Errors() []error {
 }
 
 // Parse parses the input stream into a list of Nodes (top-level fields).
-func (p *parser) Parse() Node {
-	if p.peekToken.Type == token.EOF && p.curToken.Type == token.EOF {
+func (p *parser) parse() Node {
+	if p.peekToken.Type == token.EOF {
 		return AllIdentifiers{}
 	}
 
 	return p.parseFields()
 }
 
-func (p *parser) nextToken() { p.curToken = p.peekToken; p.peekToken = p.l.NextToken() }
+func (p *parser) nextToken() {
+	p.curToken = p.peekToken
+	p.peekToken = p.l.NextToken()
+}
 
 // parseFields parses a comma-separated list of fields until a right parenthesis or EOF.
 // It assumes p.curToken is positioned at the first token of the list (which can be Ident, Rparen, or EOF).
 func (p *parser) parseFields() Node {
-	nodes := make([]Identifier, 0)
+	identifiers := make([]Identifier, 0)
 
 	for p.curToken.Type != token.EOF && p.curToken.Type != token.Rparen {
 		if p.curToken.Type != token.Ident {
@@ -62,7 +65,7 @@ func (p *parser) parseFields() Node {
 		}
 
 		n := p.parseField()
-		nodes = append(nodes, n)
+		identifiers = append(identifiers, n)
 
 		// After a field, the current token is expected to be either ',' or ')' or EOF
 		switch p.curToken.Type {
@@ -80,7 +83,7 @@ func (p *parser) parseFields() Node {
 		}
 	}
 
-	return Identifiers(nodes)
+	return Identifiers(identifiers)
 }
 
 // parseField parses a single identifier with optional nested children in parentheses.

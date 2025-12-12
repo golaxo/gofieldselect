@@ -8,63 +8,6 @@
 
 A powerful `select` query parameter implementation based on [Field selection][field-selection] for filtering desired fields in a REST API.
 
-## 🚀 Features
-
-GoFieldSelect provides a way to return only certain fields.
-
-### Root field selection
-
-e.g.
-
-Original JSON output:
-
-```json
-{
-  "id": 1,
-  "name": "John",
-  "surname": "Doe",
-  "age": 20
-}
-```
-
-Output for `?fields=id,name`:
-
-```json
-{
-  "id": 1,
-  "name": "John"
-}
-```
-
-### Nested field selection
-
-e.g.
-
-Original JSON output:
-
-```json
-{
-  "id": 1,
-  "name": "John",
-  "address": {
-    "street": "Example street",
-    "number": "1"
-  }
-}
-```
-
-Output for `?fields=id,name,address(street)`:
-
-```json
-{
-  "id": 1,
-  "name": "John",
-  "address": {
-    "street": "Example street"
-  }
-}
-```
-
 ## ⬇️ Getting Started
 
 To start using it:
@@ -73,7 +16,7 @@ To start using it:
 go get github.com/golaxo/gofieldselect@latest
 ```
 
-And then use it either by 
+And then use it either by
 
 ### Reflection for an existing instance
 
@@ -106,5 +49,62 @@ dto := examples.User{
 ```
 
 Check [examples/get](./examples/get/main.go) to see it in action.
+
+## 🚀 Features
+
+GoFieldSelect provides a way to return only certain fields. It can be used as a query parameter in your REST endpoints.
+
+### Root field selection
+
+e.g.
+
+Original JSON:
+
+```json
+{
+  "id": 1,
+  "name": "John",
+  "surname": "Doe",
+  "age": 20
+}
+```
+
+JSON selecting some fields: `?fields=id,name`:
+
+```json
+{
+  "id": 1,
+  "name": "John"
+}
+```
+
+### Nested field selection
+
+e.g.
+
+Original JSON:
+
+```json
+{
+  "id": 1,
+  "name": "John",
+  "address": {
+    "street": "Example street",
+    "number": "1"
+  }
+}
+```
+
+JSON selecting some fields: `?fields=id,name,address(street)`:
+
+```json
+{
+  "id": 1,
+  "name": "John",
+  "address": {
+    "street": "Example street"
+  }
+}
+```
 
 [field-selection]: https://learn.microsoft.com/en-us/azure/data-api-builder/keywords/select-rest
