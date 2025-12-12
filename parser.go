@@ -37,6 +37,7 @@ func (p *parser) Parse() Node {
 	if p.peekToken.Type == token.EOF && p.curToken.Type == token.EOF {
 		return AllIdentifiers{}
 	}
+
 	return p.parseFields()
 }
 
