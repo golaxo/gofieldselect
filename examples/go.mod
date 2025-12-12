@@ -2,8 +2,8 @@ module examples
 
 go 1.24
 
-replace codeberg.org/manuelarte/gofieldselect => ../
+replace github.com/golaxo/gofieldselect => ../
 
 require (
-	codeberg.org/manuelarte/gofieldselect v0.0.1
+	github.com/golaxo/gofieldselect v0.0.1
 )

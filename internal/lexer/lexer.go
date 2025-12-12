@@ -2,7 +2,7 @@
 package lexer
 
 import (
-	"codeberg.org/manuelarte/gofieldselect/internal/token"
+	"github.com/golaxo/gofieldselect/internal/token"
 )
 
 // Lexer to parse the input.

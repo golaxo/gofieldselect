@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"codeberg.org/manuelarte/gofieldselect/internal/lexer"
+	"github.com/golaxo/gofieldselect/internal/lexer"
 )
 
 type Address struct {

@@ -3,7 +3,7 @@ package gofieldselect
 import (
 	"testing"
 
-	"codeberg.org/manuelarte/gofieldselect/internal/lexer"
+	"github.com/golaxo/gofieldselect/internal/lexer"
 )
 
 func TestParse_Nested(t *testing.T) {

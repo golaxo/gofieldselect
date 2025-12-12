@@ -3,7 +3,7 @@ package lexer
 import (
 	"testing"
 
-	"codeberg.org/manuelarte/gofieldselect/internal/token"
+	"github.com/golaxo/gofieldselect/internal/token"
 )
 
 func TestNextToken_Nested(t *testing.T) {

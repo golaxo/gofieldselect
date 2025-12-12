@@ -4,12 +4,13 @@ import (
 	"reflect"
 	"strings"
 
-	"codeberg.org/manuelarte/gofieldselect/internal/lexer"
+	"github.com/golaxo/gofieldselect/internal/lexer"
 )
 
 // GetWithReflection creates a new instance [T] with only the fields specified in [n].
 // It goes, using reflection, through all the fields in the type [T] and if the field is exported
-// and by either checking the JSON tag or the field name, setting a default value or the value that comes from the source.
+// and by either checking the JSON tag or the field name, setting a default value or the
+// value that comes from the source.
 //
 //nolint:exhaustive,gocognit,nestif,funlen // refactor later
 func GetWithReflection[T any](n Node, source T) (T, error) {

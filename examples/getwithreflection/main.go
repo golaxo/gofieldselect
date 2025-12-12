@@ -5,7 +5,7 @@ import (
 
 	"examples"
 
-	"codeberg.org/manuelarte/gofieldselect"
+	"github.com/golaxo/gofieldselect"
 )
 
 func main() {

@@ -3,8 +3,8 @@ package gofieldselect
 import (
 	"slices"
 
-	"codeberg.org/manuelarte/gofieldselect/internal/lexer"
-	"codeberg.org/manuelarte/gofieldselect/internal/token"
+	"github.com/golaxo/gofieldselect/internal/lexer"
+	"github.com/golaxo/gofieldselect/internal/token"
 )
 
 type parser struct {
