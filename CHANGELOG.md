@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/golaxo/gofieldselect/compare/v0.0.2...v0.0.3) (2025-12-14)
+
+
+### Bug Fixes
+
+* fix bug ([#13](https://github.com/golaxo/gofieldselect/issues/13)) ([d694811](https://github.com/golaxo/gofieldselect/commit/d6948110eafaf609cd733d2a3e7cd890ce7748ae))
+
 ## [0.0.2](https://github.com/golaxo/gofieldselect/compare/v0.0.1...v0.0.2) (2025-12-12)
 
 
