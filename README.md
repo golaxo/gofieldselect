@@ -1,6 +1,7 @@
 # Go Field Select
 
 [![version](https://img.shields.io/github/v/release/golaxo/gofieldselect)](https://img.shields.io/github/v/release/golaxo/gofieldselect)
+[![CI](https://github.com/golaxo/gofieldselect/actions/workflows/ci.yml/badge.svg)](https://github.com/golaxo/gofieldselect/actions/workflows/ci.yml)
 [![PR checks](https://github.com/golaxo/gofieldselect/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/golaxo/gofieldselect/actions/workflows/pr-checks.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/golaxo/gofieldselect)](https://goreportcard.com/report/github.com/golaxo/gofieldselect)
 
