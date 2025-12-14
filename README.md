@@ -19,17 +19,6 @@ go get github.com/golaxo/gofieldselect@latest
 
 And then use it either by
 
-### Reflection for an existing instance
-
-```go
-n, _ := gofieldselect.Parse("name,surname")
-src := User{Name: "John", Surname: "Doe", Age: 20}
-selected, _ := gofieldselect.GetWithReflection(n, src)
-// selected only contains `name` and `surname` set, `age` is set to its default value.
-```
-
-Check [examples/getwithreflection](./examples/getwithreflection/main.go) to see it in action.
-
 ### Using Get for each field
 
 ```go
@@ -51,39 +40,22 @@ dto := examples.User{
 
 Check [examples/get](./examples/get/main.go) to see it in action.
 
+### Reflection for an existing instance
+
+```go
+n, _ := gofieldselect.Parse("name,surname")
+src := User{Name: "John", Surname: "Doe", Age: 20}
+selected, _ := gofieldselect.GetWithReflection(n, src)
+// selected only contains `name` and `surname` set, `age` is set to its default value.
+```
+
+Check [examples/getwithreflection](./examples/getwithreflection/main.go) to see it in action.
+
 ## 🚀 Features
 
 GoFieldSelect provides a way to return only certain fields. It can be used as a query parameter in your REST endpoints.
 
-### Root field selection
-
-e.g.
-
-Original JSON:
-
-```json
-{
-  "id": 1,
-  "name": "John",
-  "surname": "Doe",
-  "age": 20
-}
-```
-
-JSON selecting some fields: `?fields=id,name`:
-
-```json
-{
-  "id": 1,
-  "name": "John"
-}
-```
-
-### Nested field selection
-
-e.g.
-
-Original JSON:
+Imagine you have the following JSON:
 
 ```json
 {
@@ -95,6 +67,19 @@ Original JSON:
   }
 }
 ```
+
+### Root field selection
+
+JSON selecting some fields: `?fields=id,name`:
+
+```json
+{
+  "id": 1,
+  "name": "John"
+}
+```
+
+### Nested field selection
 
 JSON selecting some fields: `?fields=id,name,address(street)`:
 
