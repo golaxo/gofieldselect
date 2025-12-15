@@ -13,10 +13,11 @@ type Address struct {
 }
 
 type User struct {
-	Name    string  `json:"name"`
-	Surname string  `json:"surname"`
-	Age     int     `json:"age"`
-	Address Address `json:"address"`
+	Name     string  `json:"name"`
+	Surname  string  `json:"surname"`
+	Age      int     `json:"age"`
+	Password string  `json:"-"`
+	Address  Address `json:"address"`
 }
 
 type UserPtr struct {
@@ -42,6 +43,31 @@ func TestApplyFromNode_FlatFields(t *testing.T) {
 		Name:    src.Name,
 		Surname: src.Surname,
 	}
+
+	got, err := GetWithReflection(nodes, src)
+	if err != nil {
+		t.Fatalf("WithReflection returned error: %v", err)
+	}
+
+	if got != expected {
+		t.Fatalf("expected %+v; got %+v", expected, got)
+	}
+}
+
+func TestApplyFromNode_IgnoringNotAllowedJSON(t *testing.T) {
+	t.Parallel()
+
+	nodes := parse(t, "password")
+
+	src := User{
+		Name:     "John",
+		Surname:  "Doe",
+		Password: "mysecret",
+		Age:      18,
+		Address:  Address{Street: "Main", Number: 42},
+	}
+
+	expected := User{}
 
 	got, err := GetWithReflection(nodes, src)
 	if err != nil {
