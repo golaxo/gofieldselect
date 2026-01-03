@@ -6,7 +6,7 @@ import (
 	"github.com/golaxo/gofieldselect/internal/lexer"
 )
 
-func TestParse_Empty(t *testing.T) {
+func TestParseEmpty(t *testing.T) {
 	t.Parallel()
 
 	input := ""
@@ -22,7 +22,7 @@ func TestParse_Empty(t *testing.T) {
 	}
 }
 
-func TestParse_Nested(t *testing.T) {
+func TestParseNested(t *testing.T) {
 	t.Parallel()
 
 	input := "id,name,address(street,number),age"
@@ -62,7 +62,7 @@ func TestParse_Nested(t *testing.T) {
 	assertIdent(t, identifiers[3], "age")
 }
 
-func TestParse_Whitespace(t *testing.T) {
+func TestParseWhitespace(t *testing.T) {
 	t.Parallel()
 
 	input := "  id ,  name , address ( street , number ) , age  "
@@ -83,7 +83,7 @@ func TestParse_Whitespace(t *testing.T) {
 	}
 }
 
-func TestParse_JSONKeyChars(t *testing.T) {
+func TestParseJSONKeyChars(t *testing.T) {
 	t.Parallel()
 
 	input := "my-name,1,#"
@@ -108,7 +108,7 @@ func TestParse_JSONKeyChars(t *testing.T) {
 	assertIdent(t, identifiers[2], "#")
 }
 
-func TestParse_EmptyParenthesis(t *testing.T) {
+func TestParseEmptyParenthesis(t *testing.T) {
 	t.Parallel()
 
 	input := "id,name,address()"
@@ -129,7 +129,7 @@ func TestParse_EmptyParenthesis(t *testing.T) {
 	}
 }
 
-func TestParse_NotClosingParenthesis(t *testing.T) {
+func TestParseNotClosingParenthesis(t *testing.T) {
 	t.Parallel()
 
 	input := "id,name,address(street,number"

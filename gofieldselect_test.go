@@ -27,7 +27,7 @@ type UserPtr struct {
 	Address *Address `json:"address"`
 }
 
-func TestApplyFromNode_FlatFields(t *testing.T) {
+func TestApplyFromNodeFlatFields(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "name,surname")
@@ -54,7 +54,7 @@ func TestApplyFromNode_FlatFields(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_IgnoringNotAllowedJSON(t *testing.T) {
+func TestApplyFromNodeIgnoringNotAllowedJSON(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "password")
@@ -79,7 +79,7 @@ func TestApplyFromNode_IgnoringNotAllowedJSON(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_PtrField(t *testing.T) {
+func TestApplyFromNodePtrField(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "name,surname")
@@ -106,7 +106,7 @@ func TestApplyFromNode_PtrField(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_Nested(t *testing.T) {
+func TestApplyFromNodeNested(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "address(street)")
@@ -132,7 +132,7 @@ func TestApplyFromNode_Nested(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_FieldNameWhenNoJSONTag(t *testing.T) {
+func TestApplyFromNodeFieldNameWhenNoJSONTag(t *testing.T) {
 	t.Parallel()
 
 	type S struct {
@@ -154,7 +154,7 @@ func TestApplyFromNode_FieldNameWhenNoJSONTag(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_PointerInput(t *testing.T) {
+func TestApplyFromNodePointerInput(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "name")
@@ -171,7 +171,7 @@ func TestApplyFromNode_PointerInput(t *testing.T) {
 	}
 }
 
-func TestApplyFromNode_NonStructError(t *testing.T) {
+func TestApplyFromNodeNonStructError(t *testing.T) {
 	t.Parallel()
 
 	nodes := parse(t, "name")
