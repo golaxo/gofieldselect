@@ -24,7 +24,7 @@ var (
 	other2 user2
 )
 
-func Benchmark_GetWithReflection(b *testing.B) {
+func BenchmarkGetWithReflection(b *testing.B) {
 	u := user{
 		Name:    "John",
 		Surname: "Doe",
@@ -41,7 +41,7 @@ func Benchmark_GetWithReflection(b *testing.B) {
 	}
 }
 
-func Benchmark_Get(b *testing.B) {
+func BenchmarkGet(b *testing.B) {
 	u := user{
 		Name:    "John",
 		Surname: "Doe",

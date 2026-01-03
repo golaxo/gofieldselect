@@ -6,7 +6,7 @@ import (
 	"github.com/golaxo/gofieldselect/internal/token"
 )
 
-func TestNextToken_Nested(t *testing.T) {
+func TestNextTokenNested(t *testing.T) {
 	t.Parallel()
 
 	input := "id,name,address(street,number),age"
@@ -42,7 +42,7 @@ func TestNextToken_Nested(t *testing.T) {
 	}
 }
 
-func TestNextToken_Whitespace(t *testing.T) {
+func TestNextTokenWhitespace(t *testing.T) {
 	t.Parallel()
 
 	input := "  id ,  name , address ( street , number ) , age  "
@@ -73,7 +73,7 @@ func TestNextToken_Whitespace(t *testing.T) {
 	}
 }
 
-func TestNextToken_Empty(t *testing.T) {
+func TestNextTokenEmpty(t *testing.T) {
 	t.Parallel()
 
 	l := New("")
@@ -84,7 +84,7 @@ func TestNextToken_Empty(t *testing.T) {
 	}
 }
 
-func TestNextToken_JSONKeyChars(t *testing.T) {
+func TestNextTokenJSONKeyChars(t *testing.T) {
 	t.Parallel()
 
 	input := "my-name,1,#"
@@ -108,7 +108,7 @@ func TestNextToken_JSONKeyChars(t *testing.T) {
 	}
 }
 
-func TestNextToken_Tab(t *testing.T) {
+func TestNextTokenTab(t *testing.T) {
 	t.Parallel()
 
 	expected := []token.Token{
