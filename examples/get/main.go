@@ -39,19 +39,20 @@ func main() {
 		panic(err)
 	}
 
+	var address *examples.Address
 	addressFieldSelectionNode, ok := fieldSelection.SelectField("address")
-	if !ok {
-		panic("address field not found")
+	if ok {
+		address = &examples.Address{
+			Street: gofieldselect.Get(addressFieldSelectionNode.Child, "street", user.Address.Street),
+			Number: gofieldselect.Get(addressFieldSelectionNode.Child, "number", user.Address.Number),
+		}
 	}
 
 	dto := examples.User{
 		Name:    gofieldselect.Get(fieldSelection, "name", user.Name),
 		Surname: gofieldselect.Get(fieldSelection, "surname", user.Surname),
 		Age:     gofieldselect.Get(fieldSelection, "age", user.Age),
-		Address: &examples.Address{
-			Street: gofieldselect.Get(addressFieldSelectionNode.Child, "street", user.Address.Street),
-			Number: gofieldselect.Get(addressFieldSelectionNode.Child, "number", user.Address.Number),
-		},
+		Address: address,
 	}
 
 	fmt.Printf("Source: \n %+v\n", examples.ToIndentedJson(user))
